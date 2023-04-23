@@ -1,0 +1,92 @@
+{
+  "project_info": {
+    "project_number": "251764024862",
+    "project_id": "ty-homeservicesapp",
+    "storage_bucket": "ty-homeservicesapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251764024862:android:2b1626ed2d3d80bb86f00f",
+        "android_client_info": {
+          "package_name": "com.ty_demo_home_services_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251764024862-qq104pmkioqr9o3hu7eap10hqv0e59iu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ty_demo_home_services_app",
+            "certificate_hash": "dda6a25072d10d6f8e1ef064da9565ac651d6a56"
+          }
+        },
+        {
+          "client_id": "251764024862-n8qt3u09k4un0n1colnd9ibs8bjd29vf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl4jsB0Ahe6JCVAAnxhPgYmQKdfRAZw4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251764024862-n8qt3u09k4un0n1colnd9ibs8bjd29vf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251764024862:android:2f57d86dbacfcc9286f00f",
+        "android_client_info": {
+          "package_name": "com.ty_home_services_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251764024862-0700lb21gqk8ccoav13atpd9b7pgm0ne.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ty_home_services_app",
+            "certificate_hash": "dda6a25072d10d6f8e1ef064da9565ac651d6a56"
+          }
+        },
+        {
+          "client_id": "251764024862-v3ncpca11u3bm9bp4p49orpmm1ar6cas.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ty_home_services_app",
+            "certificate_hash": "a7b4cfec8a4294cd90a1f1f93bc6ce591d705cce"
+          }
+        },
+        {
+          "client_id": "251764024862-n8qt3u09k4un0n1colnd9ibs8bjd29vf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBl4jsB0Ahe6JCVAAnxhPgYmQKdfRAZw4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251764024862-n8qt3u09k4un0n1colnd9ibs8bjd29vf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
