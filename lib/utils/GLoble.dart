@@ -13,4 +13,5 @@ class Globle {
   static List<ServiceCategories> allServiceCategoriesList = [];
   static List<WorkerModel> workerDetails = [];
   static int workerId = 0;
+  static bool getSplashSee = true;
 }

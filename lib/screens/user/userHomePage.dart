@@ -13,6 +13,8 @@ import '../../utils/GLoble.dart';
 import '../../utils/components.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../component/adminHomePageComponent/addServiceCategories.dart';
+
 class UserHomePage extends StatefulWidget {
   const UserHomePage({Key? key}) : super(key: key);
 
@@ -43,6 +45,7 @@ class _UserHomePageState extends State<UserHomePage> {
 
   String isSelected = "All";
   int checkListLength = 0;
+  int checkAllListLength = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -351,6 +354,12 @@ class _UserHomePageState extends State<UserHomePage> {
                       checkListLength = 5;
                     }
 
+                    if (allServiceCategoriesList.length < 7) {
+                      checkAllListLength = allServiceCategoriesList.length;
+                    } else {
+                      checkAllListLength = 6;
+                    }
+
                     return Column(
                       children: [
                         SingleChildScrollView(
@@ -382,7 +391,7 @@ class _UserHomePageState extends State<UserHomePage> {
                                 },
                               ),
                               ...Globle.allServiceCategoriesList
-                                  .sublist(0, 8)
+                                  .sublist(0, checkAllListLength)
                                   .map(
                                 (e) {
                                   return Padding(

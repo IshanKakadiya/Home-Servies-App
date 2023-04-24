@@ -35,17 +35,24 @@ import 'package:ty_demo_home_services_app/screens/user/imageStore.dart';
 import 'package:ty_demo_home_services_app/screens/user/serviceDetailsPage.dart';
 import 'package:ty_demo_home_services_app/screens/user/serviceSearchPage.dart';
 import 'package:ty_demo_home_services_app/screens/user/userHomePage.dart';
+import 'package:ty_demo_home_services_app/utils/GLoble.dart';
 import 'screens/component/adminHomePageComponent/show_sub.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+getSpalshScreenData() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  Globle.getSplashSee = prefs.getBool('spalshSee') ?? true;
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  getSpalshScreenData();
   await Firebase.initializeApp();
 
   runApp(
     MaterialApp(
       theme: ThemeData.dark(),
-      initialRoute: "splashScreenPage",
+      initialRoute: (Globle.getSplashSee) ? "splashScreenPage" : "loginPage",
       routes: {
         "userHomePage": (context) => const UserHomePage(),
         "Add_Review_Rating_Page": (context) => const Add_Review_Rating_Page(),

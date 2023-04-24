@@ -189,51 +189,54 @@ class _ServiceDetailsPageState extends State<ServiceDetailsPage> {
                     ),
                   ),
                   const SizedBox(width: 15),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 7),
-                      Text(
-                        "Sub-Service Name : ",
-                        style: GoogleFonts.openSans(),
-                      ),
-                      Text(
-                        data.serviceName,
-                        style: GoogleFonts.openSans(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 153, 119, 247),
+                  SizedBox(
+                    width: 165,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(height: 7),
+                        Text(
+                          "Sub-Service Name : ",
+                          style: GoogleFonts.openSans(),
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        "Total Minutes : ",
-                        style: GoogleFonts.openSans(),
-                      ),
-                      Text(
-                        "${data.totalMinute} Minutes",
-                        style: GoogleFonts.openSans(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 153, 119, 247),
+                        Text(
+                          data.serviceName,
+                          style: GoogleFonts.openSans(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 153, 119, 247),
+                          ),
                         ),
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        "Total Amount : ",
-                        style: GoogleFonts.openSans(),
-                      ),
-                      Text(
-                        (discountPer != null)
-                            ? "\u{20B9} ${data.pricePerHour} - $discountPer % = ${(data.pricePerHour - ((data.pricePerHour / 100) * discountPer!)).toInt()}  RS"
-                            : "\u{20B9} ${data.pricePerHour}",
-                        style: GoogleFonts.openSans(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: const Color.fromARGB(255, 153, 119, 247),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Total Minutes : ",
+                          style: GoogleFonts.openSans(),
                         ),
-                      ),
-                    ],
+                        Text(
+                          "${data.totalMinute} Minutes",
+                          style: GoogleFonts.openSans(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 153, 119, 247),
+                          ),
+                        ),
+                        const SizedBox(height: 5),
+                        Text(
+                          "Total Amount : ",
+                          style: GoogleFonts.openSans(),
+                        ),
+                        Text(
+                          (discountPer != null)
+                              ? "\u{20B9} ${data.pricePerHour} - $discountPer % = ${(data.pricePerHour - ((data.pricePerHour / 100) * discountPer!)).toInt()}  RS"
+                              : "\u{20B9} ${data.pricePerHour}",
+                          style: GoogleFonts.openSans(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: const Color.fromARGB(255, 153, 119, 247),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -426,8 +429,11 @@ class _ServiceDetailsPageState extends State<ServiceDetailsPage> {
                                                             RatingBar.builder(
                                                               itemSize: 13,
                                                               initialRating: (e
-                                                                      .totalStar /
-                                                                  e.totalRating),
+                                                                          .totalRating !=
+                                                                      0)
+                                                                  ? e.totalStar /
+                                                                      e.totalRating
+                                                                  : 0,
                                                               direction: Axis
                                                                   .horizontal,
                                                               allowHalfRating:

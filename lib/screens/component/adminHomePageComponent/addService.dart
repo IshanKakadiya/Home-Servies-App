@@ -19,6 +19,8 @@ class AddService extends StatefulWidget {
   State<AddService> createState() => _AddServiceState();
 }
 
+List<Service> allServicesList = [];
+
 class _AddServiceState extends State<AddService> {
   @override
   void initState() {
@@ -57,7 +59,7 @@ class _AddServiceState extends State<AddService> {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-                    List<Service> allServicesList =
+                    allServicesList =
                         snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map<String, dynamic> data =
                           document.data()! as Map<String, dynamic>;
@@ -332,6 +334,8 @@ class _ServiceDetailsFormPageState extends State<ServiceDetailsFormPage> {
     setState(() {});
   }
 
+  String? serviceCheckoutName;
+
   @override
   void initState() {
     super.initState();
@@ -339,6 +343,7 @@ class _ServiceDetailsFormPageState extends State<ServiceDetailsFormPage> {
 
     if (widget.data != null) {
       servicesNameController.text = widget.data!.serviceName;
+      serviceCheckoutName = widget.data!.serviceName;
       pricePerHourController.text = widget.data!.pricePerHour.toString();
       totalMinuteController.text = widget.data!.totalMinute.toString();
       selectedCategory = widget.data!.serviceCategoriesName;
@@ -351,7 +356,8 @@ class _ServiceDetailsFormPageState extends State<ServiceDetailsFormPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Add Sub-Service"),
+          title: Text(
+              (widget.data == null) ? "Add Sub-Service" : "Update Sub-Service"),
           centerTitle: true,
         ),
         body: Padding(
@@ -444,6 +450,12 @@ class _ServiceDetailsFormPageState extends State<ServiceDetailsFormPage> {
                           return "Enter Your Sub-Service Name";
                         }
 
+                        for (int i = 0; i < allServicesList.length; i++) {
+                          if (val == allServicesList[i].serviceName &&
+                              val != serviceCheckoutName) {
+                            return "Sub-Service Name Not be Dublicate";
+                          }
+                        }
                         return null;
                       },
                       inputFormatters: [
@@ -676,16 +688,6 @@ class _ServiceDetailsFormPageState extends State<ServiceDetailsFormPage> {
                             }
                           : () async {
                               print("update");
-
-                              // late int? id;
-                              // if (widget.data == null) {
-                              //   id = await CloudFireStoreDatabaseHelper
-                              //       .cloudFireStoreDatabaseHelper
-                              //       .gerCounter(collection: "serviceCounter");
-                              //   id = id + 1;
-                              // } else {
-                              //   id = widget.data!.id;
-                              // }
 
                               if (serviceFormKey.currentState!.validate() &&
                                   imageURL != null &&

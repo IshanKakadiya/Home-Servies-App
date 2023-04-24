@@ -19,7 +19,11 @@ class AddServiceCategories extends StatefulWidget {
   State<AddServiceCategories> createState() => _AddServiceCategoriesState();
 }
 
+List<ServiceCategories> allServiceCategoriesList = [];
+
 class _AddServiceCategoriesState extends State<AddServiceCategories> {
+  //
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -45,7 +49,7 @@ class _AddServiceCategoriesState extends State<AddServiceCategories> {
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            List<ServiceCategories> allServiceCategoriesList =
+            allServiceCategoriesList =
                 snapshot.data!.docs.map((DocumentSnapshot document) {
               Map<String, dynamic> data =
                   document.data()! as Map<String, dynamic>;
@@ -224,6 +228,7 @@ class _ServiceCategoryDetailsFormPageState
   TextEditingController serviceCategoriesNameController =
       TextEditingController();
   String? categoryName;
+  String? categoryCheckoutName;
   String? imageURL;
 
   @override
@@ -232,6 +237,7 @@ class _ServiceCategoryDetailsFormPageState
 
     if (widget.data != null) {
       nameCategoriesController.text = widget.data!.name;
+      categoryCheckoutName = widget.data!.name;
       imageURL = widget.data!.imageURL;
     }
   }
@@ -241,7 +247,9 @@ class _ServiceCategoryDetailsFormPageState
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Add Service"),
+          title: Text(
+            (widget.data == null) ? "Add Service" : "Update Service",
+          ),
           centerTitle: true,
         ),
         body: Padding(
@@ -333,6 +341,15 @@ class _ServiceCategoryDetailsFormPageState
                         validator: (val) {
                           if (val!.isEmpty) {
                             return "Enter Your Service Name";
+                          }
+
+                          for (int i = 0;
+                              i < allServiceCategoriesList.length;
+                              i++) {
+                            if (val == allServiceCategoriesList[i].name &&
+                                val != categoryCheckoutName) {
+                              return "Service Name Not be Dublicate";
+                            }
                           }
                           return null;
                         },

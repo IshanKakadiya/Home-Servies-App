@@ -7,12 +7,18 @@ import 'package:google_fonts/google_fonts.dart';
 import '../helper/cloud_firestore_database_helper.dart';
 import '../helper/firebaseRegistrationHelper.dart';
 import 'component/ScaffoldMessengerComponent.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+}
+
+setSpalshScreenData() async {
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.setBool('spalshSee', false);
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -29,6 +35,12 @@ class _LoginPageState extends State<LoginPage> {
   String? email;
   String? password;
   bool showPassword = false;
+
+  @override
+  void initState() {
+    super.initState();
+    setSpalshScreenData();
+  }
 
   @override
   Widget build(BuildContext context) {
