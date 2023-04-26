@@ -354,8 +354,9 @@ class _UserHomePageState extends State<UserHomePage> {
                       checkListLength = 5;
                     }
 
-                    if (allServiceCategoriesList.length < 7) {
-                      checkAllListLength = allServiceCategoriesList.length;
+                    if (Globle.allServiceCategoriesList.length < 6) {
+                      checkAllListLength =
+                          Globle.allServiceCategoriesList.length;
                     } else {
                       checkAllListLength = 6;
                     }
