@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ty_demo_home_services_app/helper/cloud_firestore_database_helper.dart';
 import 'package:ty_demo_home_services_app/models/Feedback_Model.dart';
-
 import 'package:ty_demo_home_services_app/models/promocode.dart';
 
 class Show_Feedback_Page extends StatefulWidget {
@@ -49,8 +48,8 @@ class _Show_Feedback_PageState extends State<Show_Feedback_Page> {
               separatorBuilder: (context, i) => const SizedBox(height: 15),
               itemBuilder: (context, i) {
                 return InkWell(
-                  onTap: () {
-                    showDialog(
+                  onTap: () async {
+                    await showDialog(
                       context: context,
                       builder: (context) => Dialog(
                         shape: const RoundedRectangleBorder(
@@ -64,21 +63,19 @@ class _Show_Feedback_PageState extends State<Show_Feedback_Page> {
                           children: [
                             TextButton(
                               onPressed: () async {
-                                Map<String, dynamic> newfeedbackData = {
-                                  "id": feedbackData[i].id,
-                                  "Description": feedbackData[i].Description,
-                                  "Feedback_Date":
-                                      feedbackData[i].Feedback_Date,
-                                  "Feedback_Time":
-                                      feedbackData[i].Feedback_Time,
-                                  "is_Hide": feedbackData[i].is_Hide,
+                                Map<String, dynamic> feedbackDetails = {
+                                  'id': feedbackData[i].id,
+                                  'User_Id': feedbackData[i].User_Id,
+                                  'Feedback_Date': feedbackData[i].Date,
+                                  'Description': feedbackData[i].Description,
+                                  'is_Hide': feedbackData[i].is_Hide,
                                 };
 
                                 await CloudFireStoreDatabaseHelper
                                     .cloudFireStoreDatabaseHelper.fireStore
                                     .collection("Feedback")
                                     .doc("${feedbackData[i].id}")
-                                    .update(newfeedbackData)
+                                    .update(feedbackDetails)
                                     .then((value) async {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
@@ -176,7 +173,7 @@ class _Show_Feedback_PageState extends State<Show_Feedback_Page> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Number : ${number++}\nDescription : ${feedbackData[i].Description}\nDate : ${feedbackData[i].Feedback_Date}\nTime : ${feedbackData[i].Feedback_Time}\nIs Hide : ${feedbackData[i].is_Hide}",
+                          "Number : ${number++}\nName : ${feedbackData[i].name}\nEmail : ${feedbackData[i].email}\nDescription : ${feedbackData[i].Description}\nIs Hide : ${feedbackData[i].is_Hide}\nDate : ${feedbackData[i].Date.toDate()}",
                           overflow: TextOverflow.ellipsis,
                           style: GoogleFonts.openSans(
                             fontSize: 15,

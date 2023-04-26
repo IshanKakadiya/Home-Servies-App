@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_local_variable, unnecessary_string_interpolations, depend_on_referenced_packages
+// ignore_for_file: file_names, unused_local_variable, unnecessary_string_interpolations, depend_on_referenced_packages, empty_catches
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -12,8 +12,6 @@ import '../../models/serviceCategories.dart';
 import '../../utils/GLoble.dart';
 import '../../utils/components.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../component/adminHomePageComponent/addServiceCategories.dart';
 
 class UserHomePage extends StatefulWidget {
   const UserHomePage({Key? key}) : super(key: key);

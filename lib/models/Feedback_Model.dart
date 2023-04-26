@@ -1,28 +1,31 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, file_names
 
 class FeedbackModal {
   dynamic id;
   String Description;
-  String Feedback_Date;
-  String Feedback_Time;
-  String User_Id;
+  List User_Id;
+  String name;
+  String email;
+  dynamic Date;
   bool is_Hide;
 
   FeedbackModal({
     this.id,
+    required this.Date,
+    required this.name,
+    required this.email,
     required this.Description,
-    required this.Feedback_Date,
-    required this.Feedback_Time,
-    required this.User_Id,
     required this.is_Hide,
+    required this.User_Id,
   });
 
   factory FeedbackModal.fromMap({required Map<String, dynamic> data}) {
     return FeedbackModal(
       id: data['id'],
+      Date: data['Feedback_Date'] ?? "",
+      name: data['User_Id'][1]["fullName"] ?? "",
+      email: data['User_Id'][2]["emailId"] ?? "",
       Description: data['Description'] ?? "",
-      Feedback_Date: data['Feedback_Date'] ?? "",
-      Feedback_Time: data['Feedback_Time'] ?? "",
       User_Id: data['User_Id'] ?? "",
       is_Hide: data['is_Hide'] ?? false,
     );

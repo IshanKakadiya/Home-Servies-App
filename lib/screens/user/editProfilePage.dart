@@ -33,6 +33,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   User? user;
   bool isSignWithGoogle = false;
   String? docId;
+  bool showPassword = false;
 
   // String? address;
   // String? password;
@@ -294,52 +295,79 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ),
                             ),
                             (isSignWithGoogle == false)
-                                ? TextFormField(
-                                    controller: passwordController,
-                                    style: GoogleFonts.openSans(
-                                      color: Colors.white.withOpacity(0.9),
-                                    ),
-                                    validator: (val) {
-                                      if (val!.isEmpty) {
-                                        return "Enter Password";
-                                      } else if (val.length < 6 ||
-                                          val.length > 10) {
-                                        return "Password Length Must be 6-10";
-                                      }
+                                ? Column(
+                                    children: [
+                                      const SizedBox(height: 15),
+                                      TextFormField(
+                                        controller: passwordController,
+                                        style: GoogleFonts.openSans(
+                                          color: Colors.white.withOpacity(0.9),
+                                        ),
+                                        cursorColor: Colors.white,
+                                        validator: (val) {
+                                          if (val!.isEmpty) {
+                                            return "Enter Password";
+                                          } else if (val.length < 6 ||
+                                              val.length > 10) {
+                                            return "Password Length Must be 6-10";
+                                          }
 
-                                      return null;
-                                    },
-                                    onSaved: (val) {
-                                      password = passwordController.text;
-                                    },
-                                    keyboardType: TextInputType.visiblePassword,
-                                    obscureText: true,
-                                    decoration: InputDecoration(
-                                      focusedBorder: const OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15),
+                                          return null;
+                                        },
+                                        onSaved: (val) {
+                                          password = passwordController.text;
+                                        },
+                                        keyboardType:
+                                            TextInputType.visiblePassword,
+                                        obscureText:
+                                            (showPassword) ? false : true,
+                                        decoration: InputDecoration(
+                                          focusedBorder:
+                                              const OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(15),
+                                            ),
+                                          ),
+                                          border: const OutlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: Colors.white),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(15),
+                                            ),
+                                          ),
+                                          fillColor:
+                                              Colors.white.withOpacity(0.4),
+                                          prefixIcon: Icon(
+                                            Icons.lock_open,
+                                            color:
+                                                Colors.white.withOpacity(0.9),
+                                          ),
+                                          suffixIcon: IconButton(
+                                            icon: (showPassword)
+                                                ? const Icon(
+                                                    Icons.visibility,
+                                                    color: Colors.white,
+                                                  )
+                                                : const Icon(
+                                                    Icons.visibility_off,
+                                                    color: Colors.white,
+                                                  ),
+                                            onPressed: () {
+                                              showPassword = !showPassword;
+                                              setState(() {});
+                                            },
+                                          ),
+                                          filled: true,
+                                          hintText: "Password",
+                                          hintStyle: GoogleFonts.openSans(
+                                            color:
+                                                Colors.white.withOpacity(0.9),
+                                          ),
                                         ),
                                       ),
-                                      border: const OutlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.white),
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(15),
-                                        ),
-                                      ),
-                                      fillColor: Colors.white.withOpacity(0.4),
-                                      prefixIcon: Icon(
-                                        Icons.lock_open,
-                                        color: Colors.white.withOpacity(0.9),
-                                      ),
-                                      filled: true,
-                                      hintText: "Password",
-                                      hintStyle: GoogleFonts.openSans(
-                                        color: Colors.white.withOpacity(0.9),
-                                      ),
-                                    ),
+                                    ],
                                   )
                                 : Container(),
                           ],

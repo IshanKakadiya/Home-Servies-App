@@ -129,57 +129,84 @@ class _BookedPendingServicePageState extends State<BookedPendingServicePage> {
                 ),
                 child: const Text("Cancel booking"),
                 onPressed: () async {
-                  await CloudFireStoreDatabaseHelper
-                      .cloudFireStoreDatabaseHelper.fireStore
-                      .collection('bookingTransaction')
-                      .doc("${data.id}")
-                      .delete();
+                  await showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        title:
+                            const Center(child: Text("Booking Cancellation")),
+                        content:
+                            const Text("Are You Sure To Cancle Your Booking ?"),
+                        actions: [
+                          OutlinedButton(
+                            child: const Text("No"),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                          OutlinedButton(
+                            child: const Text("Yes"),
+                            onPressed: () async {
+                              await CloudFireStoreDatabaseHelper
+                                  .cloudFireStoreDatabaseHelper.fireStore
+                                  .collection('bookingTransaction')
+                                  .doc("${data.id}")
+                                  .delete();
 
-                  Map<String, dynamic> workerDetails = {};
+                              Map<String, dynamic> workerDetails = {};
 
-                  await CloudFireStoreDatabaseHelper
-                      .cloudFireStoreDatabaseHelper.fireStore
-                      .collection('Worker')
-                      .where('id', isEqualTo: data.workerId)
-                      .get()
-                      .then((value) {
-                    value.docs.forEach((e) {
-                      workerDetails = {
-                        'earrings': e.data()["earrings"],
-                        'Password': e.data()["Password"],
-                        'address': e.data()["address"],
-                        'totalServices': e.data()["totalServices"] - 1,
-                        'emailId': e.data()["emailId"],
-                        'fullName': e.data()["fullName"],
-                        'id': e.data()["id"],
-                        'imageURL': e.data()["imageURL"],
-                        'is_Active': e.data()["is_Active"],
-                        'mobileNo': e.data()["mobileNo"],
-                        'totalRating': e.data()["totalRating"],
-                        'totalStar': e.data()["totalStar"],
-                        'serviceList': e.data()["serviceList"],
-                        'serviceCategoryList': e.data()["serviceCategoryList"],
-                      };
-                    });
-                  });
+                              await CloudFireStoreDatabaseHelper
+                                  .cloudFireStoreDatabaseHelper.fireStore
+                                  .collection('Worker')
+                                  .where('id', isEqualTo: data.workerId)
+                                  .get()
+                                  .then((value) {
+                                value.docs.forEach((e) {
+                                  workerDetails = {
+                                    'earrings': e.data()["earrings"],
+                                    'Password': e.data()["Password"],
+                                    'address': e.data()["address"],
+                                    'totalServices':
+                                        e.data()["totalServices"] - 1,
+                                    'emailId': e.data()["emailId"],
+                                    'fullName': e.data()["fullName"],
+                                    'id': e.data()["id"],
+                                    'imageURL': e.data()["imageURL"],
+                                    'is_Active': e.data()["is_Active"],
+                                    'mobileNo': e.data()["mobileNo"],
+                                    'totalRating': e.data()["totalRating"],
+                                    'totalStar': e.data()["totalStar"],
+                                    'serviceList': e.data()["serviceList"],
+                                    'serviceCategoryList':
+                                        e.data()["serviceCategoryList"],
+                                  };
+                                });
+                              });
 
-                  CloudFireStoreDatabaseHelper
-                      .cloudFireStoreDatabaseHelper.fireStore
-                      .collection("Worker")
-                      .doc("${data.workerId}")
-                      .set(workerDetails)
-                      .catchError((e) {
-                    print("Error is $e");
-                  });
+                              CloudFireStoreDatabaseHelper
+                                  .cloudFireStoreDatabaseHelper.fireStore
+                                  .collection("Worker")
+                                  .doc("${data.workerId}")
+                                  .set(workerDetails)
+                                  .catchError((e) {
+                                print("Error is $e");
+                              });
 
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      'userHomePage', (route) => false);
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  'userHomePage', (route) => false);
 
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text("Booking Canceled"),
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: Colors.red,
-                  ));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text("Booking Canceled"),
+                                behavior: SnackBarBehavior.floating,
+                                backgroundColor: Colors.red,
+                              ));
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
               ),
             ],
@@ -218,6 +245,8 @@ class _BookedPendingServicePageState extends State<BookedPendingServicePage> {
     getPendingBookedService();
   }
 
+  int i = 0;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -234,9 +263,18 @@ class _BookedPendingServicePageState extends State<BookedPendingServicePage> {
                       child: Text("${snapshot.error}"),
                     );
                   } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    if (i == 0) {
+                      i = 1;
+                      return Column(
+                        children: const [
+                          SizedBox(height: 250),
+                          Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ],
+                      );
+                    }
+                    return Container();
                   }
                 },
               ),

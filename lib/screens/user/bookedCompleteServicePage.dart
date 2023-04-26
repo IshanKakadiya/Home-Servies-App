@@ -222,6 +222,8 @@ class _BookedCompleteServicePageState extends State<BookedCompleteServicePage> {
     getPendingBookedService();
   }
 
+  int i = 0;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -238,9 +240,18 @@ class _BookedCompleteServicePageState extends State<BookedCompleteServicePage> {
                       child: Text("${snapshot.error}"),
                     );
                   } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    if (i == 0) {
+                      i = 1;
+                      return Column(
+                        children: const [
+                          SizedBox(height: 250),
+                          Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        ],
+                      );
+                    }
+                    return Container();
                   }
                 },
               ),

@@ -62,14 +62,43 @@ Widget userHomePageDrawer({required BuildContext context}) {
       }
     },
     {
+      "icon": Icons.feedback,
+      "name": "Give Feedback",
+      "onTap": () {
+        Navigator.of(context).pushNamed('FeedbaackPage');
+      }
+    },
+    {
       "icon": Icons.logout,
       "name": "Log Out",
       "onTap": () async {
-        await FirebaseRegistrationHelper.firebaseRegistrationHelper
-            .signOutUser();
+        await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Center(child: Text("Log Out")),
+              content: const Text("Are You Sure To Logout ?"),
+              actions: [
+                OutlinedButton(
+                  child: const Text("Calcle"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                OutlinedButton(
+                  child: const Text("Logout"),
+                  onPressed: () async {
+                    await FirebaseRegistrationHelper.firebaseRegistrationHelper
+                        .signOutUser();
 
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('loginPage', (route) => false);
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('loginPage', (route) => false);
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     },
   ];
@@ -266,11 +295,33 @@ Widget adminHomePageDrawer({required BuildContext context}) {
       "icon": Icons.logout,
       "name": "Log Out",
       "onTap": () async {
-        await FirebaseRegistrationHelper.firebaseRegistrationHelper
-            .signOutUser();
+        await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Center(child: Text("Log Out")),
+              content: const Text("Are You Sure To Logout ?"),
+              actions: [
+                OutlinedButton(
+                  child: const Text("Calcle"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                OutlinedButton(
+                  child: const Text("Logout"),
+                  onPressed: () async {
+                    await FirebaseRegistrationHelper.firebaseRegistrationHelper
+                        .signOutUser();
 
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('loginPage', (route) => false);
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('loginPage', (route) => false);
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     },
   ];
@@ -441,13 +492,35 @@ Widget workerHomePageDrawer({required BuildContext context}) {
       "icon": Icons.logout,
       "name": "Log Out",
       "onTap": () async {
-        await FirebaseRegistrationHelper.firebaseRegistrationHelper
-            .signOutUser();
+        await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Center(child: Text("Log Out")),
+              content: const Text("Are You Sure To Logout ?"),
+              actions: [
+                OutlinedButton(
+                  child: const Text("Calcle"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                OutlinedButton(
+                  child: const Text("Logout"),
+                  onPressed: () async {
+                    await FirebaseRegistrationHelper.firebaseRegistrationHelper
+                        .signOutUser();
 
-        Globle.workerDetails = [];
+                    Globle.workerDetails = [];
 
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('loginPage', (route) => false);
+                    Navigator.of(context)
+                        .pushNamedAndRemoveUntil('loginPage', (route) => false);
+                  },
+                ),
+              ],
+            );
+          },
+        );
       }
     },
   ];

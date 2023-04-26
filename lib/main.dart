@@ -31,6 +31,7 @@ import 'package:ty_demo_home_services_app/screens/user/contactUsPage.dart';
 import 'package:ty_demo_home_services_app/screens/user/dateAndTimeSelectPage.dart';
 import 'package:ty_demo_home_services_app/screens/user/demo.dart';
 import 'package:ty_demo_home_services_app/screens/user/editProfilePage.dart';
+import 'package:ty_demo_home_services_app/screens/user/feedback.dart';
 import 'package:ty_demo_home_services_app/screens/user/imageStore.dart';
 import 'package:ty_demo_home_services_app/screens/user/serviceDetailsPage.dart';
 import 'package:ty_demo_home_services_app/screens/user/serviceSearchPage.dart';
@@ -86,6 +87,7 @@ Future<void> main() async {
         "Worker_Complleted_Page": (context) => const Worker_Complleted_Page(),
         "Worker_Pading_Page": (context) => const Worker_Pading_Page(),
         "billing_page": (context) => const billing_page(),
+        "FeedbaackPage": (context) => const FeedbaackPage(),
         "Worker_Edit_Profile_Page": (context) =>
             const Worker_Edit_Profile_Page(),
         "Total_Booked_Service_Page": (context) =>
